@@ -1,0 +1,100 @@
+<div class="flex flex-col gap-6 mt-4">
+
+    <div class="flex justify-start">
+       <button 
+       pButton 
+       icon="pi pi-chart-bar"
+       class="btn btn-primary w-auto"
+       (click)="toggleTable()"> 
+       {{ showTable() ? 'Ocultar estadísticas' : 'Ver estadísticas' }}
+       </button> 
+    </div>
+
+    <h1 class="text-3xl font-bold">Dragon Ball Z Super</h1>
+    <h2 class="text-xl mb-5">Todos los personajes</h2>
+
+@if (showTable()) {
+
+    @if (charactersResource.value(); as data) {
+
+    <p-table 
+    [value]="data.items"
+    [tableStyle]="{ 'min-width': '60rem' }"
+    class="p-datatable-striped p-datatable-gridlines">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">
+            Nombre
+            <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th>
+            Raza
+            <p-columnFilter 
+              field="race" 
+              matchMode="equals" 
+              [showMenu]="false">
+            </p-columnFilter>
+        </th>
+        <th pSortableColumn="ki">
+            Ki Máximo
+            <p-sortIcon field="ki"></p-sortIcon>
+        </th>
+        <th>Género</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-character>
+      <tr>
+        
+        <!-- Nombre -->
+        <td class="font-semibold">
+          {{ character.name }}
+        </td>
+
+        <!-- Raza -->
+        <td>
+          <p-tag 
+            [value]="character.race"
+            [severity]="getRaceSeverity(character.race)">
+          </p-tag>
+        </td>
+
+        <!-- Ki Máximo -->
+        <td>
+            <div class="flex items-center gap-2">
+                <p-progressBar 
+                [value]="getKiPercent(character.Ki)"
+                [style]="{
+                  height: '8px',
+                  width: '100px'
+                }"
+                [ngClass]="getKiClass(character.ki)">
+                <span class="text-xs">{{ character.ki }}</span>
+            </p-progressBar>
+            </div>
+          
+          <small>{{ character.maxKi }}</small>
+        </td>
+
+        <!-- Género -->
+        <td>
+          <i [class]="getGenderIcon(character.gender)">
+          </i>
+        </td>
+
+      </tr>
+    </ng-template>
+
+  </p-table>
+
+  <app-pagination
+    [totalRecords]="data.meta.totalItems"
+    [rows]="data.meta.itemsPerPage"
+    [currentPage]="PaginationService.currentPage()"
+    (pageChange)="onPageChange($event)"></app-pagination>
+
+    }
+}
+
+</div>

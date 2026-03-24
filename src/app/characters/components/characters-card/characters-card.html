@@ -1,0 +1,16 @@
+<div class="card card-compact bg-base-100 shadow-xl h-full flex flex-col hover:scale-105 transition-transform duration-200 animate-fadeIn">
+  <figure class="w-full h-60 flex items-center justify-center overflow-hidden">
+    <img
+      [src]="character().image | characterImage"
+      [alt]="character().name" 
+      class="w-full h-full object-contain transition-opacity duration-300" />
+  </figure>
+  <div class="card-body flex flex-col justify-between">
+    <h2 class="card-title text-accent text-lg">{{ character().name }}</h2>
+    <p>{{ character().description | slice: 0:70 }} ... </p>
+    <div class="card-actions justify-end">
+      <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text"(click)="onOpenEdit()">Editar</button>
+      <a (click)="onOpenModal(); $event.preventDefault()" class="text-blue-500 cursor-pointer">Ver Detalle</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<h1 class="text-3xl font-bold">Dragon Ball Z Super</h1>
+<h2 class="text-xl mb-5">Todos los personajes</h2>
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-2 gap-3">
+    
+    @for (character of charactersResource.value()?.items; track $index) {
+        <characters-card 
+        [character]="character"
+        (open)="openModal($event)"
+        (edit)="openEdit($event)">
+    </characters-card>
+    } @empty {
+        <p>No hay personajes</p>
+    }
+</div>
+
+@if (charactersResource.value(); as data) {
+
+    <app-pagination
+    [totalRecords]="data.meta.totalItems"
+    [rows]="data.meta.itemsPerPage"
+    [currentPage]="PaginationService.currentPage()"
+    (pageChange)="onPageChange($event)">
+  </app-pagination>
+
+}
+
+<characters-modal [character]="selectedCharacter()" (close)="closeModal()"> </characters-modal>
+

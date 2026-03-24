@@ -1,0 +1,74 @@
+@if (character) {
+  <div class="fixed inset-0 bg-black/60 flex items-center justify-center z-[9999]">
+
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden relative animate-fadeIn">
+
+      <!-- Botón cerrar -->
+      <button 
+        class="absolute top-3 right-3 text-gray-600 hover:text-black z-10"
+        (click)="closeModal()">
+        ✖
+      </button>
+
+      <!-- Imagen -->
+      <div class="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+        <img 
+          [src]="character.image" 
+          [alt]="character.name"
+          class="h-full object-contain" />
+      </div>
+
+      <!-- Contenido -->
+      <div class="p-5 space-y-3">
+
+        <!-- Nombre -->
+        <h2 class="text-2xl font-bold">
+          {{ character.name }}
+        </h2>
+
+        <!-- Raza -->
+        <span 
+          class="px-3 py-1 rounded-full text-sm font-semibold text-white"
+          [ngClass]="getRaceClass(character.race)">
+          {{ character.race }}
+        </span>
+
+        <!-- Género -->
+        <div class="flex items-center gap-2">
+          <i 
+            class="pi text-lg"
+            [ngClass]="{
+              'pi-mars text-blue-500': character.gender === 'Male',
+              'pi-venus text-pink-500': character.gender === 'Female'
+            }">
+          </i>
+          <span>{{ character.gender }}</span>
+        </div>
+
+        <!-- Ki Máximo -->
+        <div>
+          <p class="text-sm text-gray-500">Ki Máximo</p>
+
+          <!-- Opción 1: Texto -->
+          <p class="font-semibold">
+            {{ formatKi(character.maxKi) }}
+          </p>
+
+          <!-- Opción 2: ProgressBar (si usas PrimeNG) -->
+          <!--
+          <p-progressBar 
+            [value]="getKiPercentage(character.maxKi)">
+          </p-progressBar>
+          -->
+        </div>
+
+        <!-- Descripción -->
+        <p class="text-gray-600 text-sm">
+          {{ character.description }}
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+}

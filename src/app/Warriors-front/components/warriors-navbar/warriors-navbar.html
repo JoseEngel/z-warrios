@@ -1,0 +1,71 @@
+<div class="navbar bg-base-100 shadow-sm justify-between">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+      </div>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li>
+            <a routerLink="/warriors/characters" class="btn btn-ghost" routerLinkActive="text-secondary font-bold">
+                Personajes
+            </a>
+        </li>
+        <li>
+            <a routerLink="/warriors/statistics" class="btn btn-ghost" routerLinkActive="text-secondary font-bold">
+                Estadísticas
+            </a>
+        </li>
+
+      </ul>
+    </div>
+    <a routerLink="/warriors/characters" class="btn btn-ghost text-xl mr-2 md:mr-4">
+        Guerreros
+        <span class="text-secondary">Z</span>
+    </a>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      <li>
+            <a routerLink="/warriors/characters" class="btn btn-ghost" routerLinkActive="text-secondary font-bold">
+                Personajes
+            </a>
+        </li>
+        <li>
+            <a routerLink="/warriors/statistics" class="btn btn-ghost" routerLinkActive="text-secondary font-bold">
+                Estadísticas
+            </a>
+        </li>
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <div class="flex items-center gap-3 md:gap-4">
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 shadow-sm">
+        <span class="text-sm md:text-base font-medium text-gray-800 dark:text-gray-100 truncate max-w-[120px] md:max-w-none">
+          🐉 {{ userName }}
+        </span>
+      </div>
+      <button (click)="themeService.toggleTheme()" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 shadow-sm">
+        <span class="text-sm">
+          @if (themeService.theme() === 'dark') {
+            ☀️
+          } @else {
+            🌙
+          }
+        </span>
+        <span class="hidden md:inline text-sm">
+          @if (themeService.theme() === 'dark') {
+            Light
+          } @else {
+            Dark
+          }
+        </span>
+      </button>
+      <button (click)="logout()"class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500 text-white hover:bg-red-600 transition-all duration-200 shadow-sm">
+        <span>🚪</span>
+        <span class="hidden md:inline text-sm">Salir</span>
+      </button>
+    </div>
+  </div>
+</div>
