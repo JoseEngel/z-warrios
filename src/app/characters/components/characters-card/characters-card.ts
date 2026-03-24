@@ -2,7 +2,6 @@ import { Character } from '@/characters/interface/characters-interface';
 import { CharacterImagePipe } from '@/characters/pipes/characters-image.pipe';
 import { SlicePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, EventEmitter, input, output, Output } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'characters-card',
